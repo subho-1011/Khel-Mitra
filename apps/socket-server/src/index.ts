@@ -9,13 +9,13 @@ const server = createServer();
 
 export const io = new Server(server, {
     cors: {
-        origin: "*",
+        origin: CORS_ORIGINS,
         methods: ["GET", "POST"],
     },
 });
 
 socketListener(io);
 
-server.listen(PORT, () => {
+server.listen(Number(PORT), "0.0.0.0", () => {
     console.log(chalk.magenta("Server is running port :: " + PORT));
 });
