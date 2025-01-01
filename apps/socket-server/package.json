@@ -6,7 +6,7 @@
     "scripts": {
         "start": "node ./dist/index.js",
         "dev": "nodemon --exec node --loader ts-node/esm --trace-warnings src/index.ts",
-        "build": "tsc -b",
+        "build": "tsc",
         "test": "jest",
         "serve": "pnpm build && pnpm start"
     },
@@ -16,6 +16,7 @@
     "devDependencies": {
         "@jest/globals": "^29.7.0",
         "@repo/typescript-config": "workspace:*",
+        "@types/dotenv": "^8.2.3",
         "@types/express": "^5.0.0",
         "@types/jest": "^29.5.14",
         "@types/node": "^20",
