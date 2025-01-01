@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Express, Request, Response } from "express";
 import { Server } from "socket.io";
 import { createServer } from "node:http";
 
@@ -6,9 +6,9 @@ import chalk from "chalk";
 import { PORT, CORS_ORIGINS } from "./config.js";
 import { socketListener } from "./soket-listener.js";
 
-const app = express();
+const app: Express = express();
 
-app.get("/health", (req, res) => {
+app.get("/health", (req: Request, res: Response) => {
     res.send("Khel mitra websocket server is running");
 });
 
