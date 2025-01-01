@@ -1,3 +1,4 @@
+import express from "express";
 import { Server } from "socket.io";
 import { createServer } from "node:http";
 
@@ -5,7 +6,13 @@ import chalk from "chalk";
 import { PORT, CORS_ORIGINS } from "./config.js";
 import { socketListener } from "./soket-listener.js";
 
-const server = createServer();
+const app = express();
+
+app.get("/health", (req, res) => {
+    res.send("Khel mitra websocket server is running");
+});
+
+const server = createServer(app);
 
 export const io = new Server(server, {
     cors: {
@@ -16,6 +23,8 @@ export const io = new Server(server, {
 
 socketListener(io);
 
-server.listen(Number(PORT), "0.0.0.0", () => {
-    console.log(chalk.magenta("Server is running port :: " + PORT));
-});
+if (process.env.NODE_ENV !== "production") {
+    server.listen(PORT, () => {
+        console.log(chalk.magenta("Server is running port :: " + PORT));
+    });
+}
